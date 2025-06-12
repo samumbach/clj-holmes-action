@@ -37,20 +37,28 @@ else
   SCAN_ARGS+=(-t "$output_type" -o "$output_file")
 fi
 
-while IFS= read -r x; do
-  SCAN_ARGS+=(--ignored-paths "$x")
+while IFS=$' \t\n' read -r x; do
+  if [[ -n "$x" ]]; then
+    SCAN_ARGS+=(--ignored-paths "$x")
+  fi
 done <<<"${ignored_paths}"
 
-while IFS= read -r x; do
-  SCAN_ARGS+=(--rule-tags "$x")
+while IFS=$' \t\n' read -r x; do
+  if [[ -n "$x" ]]; then
+    SCAN_ARGS+=(--rule-tags "$x")
+  fi
 done <<<"${rule_tags}"
 
-while IFS= read -r x; do
-  SCAN_ARGS+=(--rule-severity "$x")
+while IFS=$' \t\n' read -r x; do
+  if [[ -n "$x" ]]; then
+    SCAN_ARGS+=(--rule-severity "$x")
+  fi
 done <<<"${rule_severities}"
 
-while IFS= read -r x; do
-  SCAN_ARGS+=(--rule-precision "$x")
+while IFS=$' \t\n' read -r x; do
+  if [[ -n "$x" ]]; then
+    SCAN_ARGS+=(--rule-precision "$x")
+  fi
 done <<<"${rule_precisions}"
 
 echo "SCAN_ARGS:"
