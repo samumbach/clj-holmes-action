@@ -8,10 +8,10 @@ output_file="$3"
 fail_on_result="$4"
 verbose="$5"
 path="$6"
-IFS=, read -ra ignored_paths   <<<"$7"
-IFS=, read -ra rule_tags       <<<"$8"
-IFS=, read -ra rule_severities <<<"$9"
-IFS=, read -ra rule_precisions <<<"${10}"
+ignored_paths="$7"
+rule_tags="$8"
+rule_severities="$9"
+rule_precisions="${10}"
 
 if [[ -d "${path}" ]]; then
   cd "${path}"
@@ -37,21 +37,21 @@ else
   SCAN_ARGS+=(-t "$output_type" -o "$output_file")
 fi
 
-for x in "${ignored_paths[@]}"; do
+while IFS= read -r x; do
   SCAN_ARGS+=(--ignored-paths "$x")
-done
+done <<<"${ignored_paths}"
 
-for x in "${rule_tags[@]}"; do
+while IFS= read -r x; do
   SCAN_ARGS+=(--rule-tags "$x")
-done
+done <<<"${rule_tags}"
 
-for x in "${rule_severities[@]}"; do
+while IFS= read -r x; do
   SCAN_ARGS+=(--rule-severity "$x")
-done
+done <<<"${rule_severities}"
 
-for x in "${rule_precisions[@]}"; do
+while IFS= read -r x; do
   SCAN_ARGS+=(--rule-precision "$x")
-done
+done <<<"${rule_precisions}"
 
 echo "SCAN_ARGS:"
 printf -- "- #%s#\n" "${SCAN_ARGS[@]}"

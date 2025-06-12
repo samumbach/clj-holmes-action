@@ -26,16 +26,16 @@ inputs:
     description: 'Directory to run clj-holmes on'
     required: false
   ignored-paths:
-    description: 'Comma-separated list of path regexes to exclude from scanning (e.g., `\.cljs$,^test/`)'
+    description: 'Newline-separated list of path regexes to exclude from scanning (e.g., "\\.cljs$\n^test/")'
     required: false
   rule-tags:
-    description: 'Comma-separated list of rule tags to include (e.g., `security,vulnerability,ssl,correctness`)'
+    description: 'Newline-separated list of rule tags to include (e.g., "security\nvulnerability\nssl\ncorrectness")'
     required: false
   rule-severities:
-    description: 'Comma-separated list of rule severities to include (e.g., `error,warning,info`)'
+    description: 'Newline-separated list of rule severities to include (e.g., "error\nwarning\ninfo")'
     required: false
   rule-precisions:
-    description: 'Comma-separated list of rule precisions to include (e.g., `low,medium,high,very-high`)'
+    description: 'Newline-separated list of rule precisions to include (e.g., "low\nmedium\nhigh\nvery-high")'
     required: false
 
 runs:
