@@ -11,7 +11,7 @@ path="$6"
 IFS=, read -ra ignored_paths   <<<"$7"
 IFS=, read -ra rule_tags       <<<"$8"
 IFS=, read -ra rule_severities <<<"$9"
-IFS=, read -ra rule_precisions <<<"$10"
+IFS=, read -ra rule_precisions <<<"${10}"
 
 if [[ -d "${path}" ]]; then
   cd "${path}"
