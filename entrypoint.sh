@@ -4,7 +4,8 @@ rules_repository="$1"
 output_type="$2"
 output_file="$3"
 fail_on_result="$4"
-path="$5"
+verbose="$5"
+path="$6"
 
 if [[ -d "${path}" ]]; then
   cd "${path}"
