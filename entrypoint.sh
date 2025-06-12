@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -euo pipefail
+
 rules_repository="$1"
 output_type="$2"
 output_file="$3"
