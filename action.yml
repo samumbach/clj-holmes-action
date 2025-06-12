@@ -25,6 +25,18 @@ inputs:
   path:
     description: 'Directory to run clj-holmes on'
     required: false
+  ignored-paths:
+    description: 'Comma-separated list of path regexes to exclude from scanning (e.g., `\.cljs$,^test/`)'
+    required: false
+  rule-tags:
+    description: 'Comma-separated list of rule tags to include (e.g., `security,vulnerability,ssl,correctness`)'
+    required: false
+  rule-severities:
+    description: 'Comma-separated list of rule severities to include (e.g., `error,warning,info`)'
+    required: false
+  rule-precisions:
+    description: 'Comma-separated list of rule precisions to include (e.g., `low,medium,high,very-high`)'
+    required: false
 
 runs:
   using: 'docker'
@@ -36,6 +48,10 @@ runs:
     - ${{ inputs.fail-on-result }}
     - ${{ inputs.verbose }}
     - ${{ inputs.path }}
+    - ${{ inputs.ignored-paths }}
+    - ${{ inputs.rule-tags }}
+    - ${{ inputs.rule-severities }}
+    - ${{ inputs.rule-precisions }}
 
 branding:
  color: gray-dark
