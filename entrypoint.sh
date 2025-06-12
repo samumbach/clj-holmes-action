@@ -33,5 +33,9 @@ else
   SCAN_ARGS+=(-t "$output_type" -o "$output_file")
 fi
 
+echo "SCAN_ARGS:"
+printf -- "- #%s#" "${SCAN_ARGS[@]}"
+echo ""
+
 clj-holmes fetch-rules -r "$rules_repository"
 clj-holmes scan -p . "${SCAN_ARGS[@]}"
