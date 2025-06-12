@@ -13,23 +13,25 @@ if [[ -d "${path}" ]]; then
   cd "${path}"
 fi
 
+SCAN_ARGS=()
+
 if [[ $verbose == "true" ]]; then
-    verbose_cmd="--verbose"
+  SCAN_ARGS+=(--verbose)
 else
-    verbose_cmd="--no-verbose"
+  SCAN_ARGS+=(--no-verbose)
 fi
 
 if [[ $fail_on_result == "true" ]]; then
-  fail_on_result_cmd="--fail-on-result";
+  SCAN_ARGS+=(--fail-on-result)
 else
-  fail_on_result_cmd="--no-fail-on-result";
+  SCAN_ARGS+=(--no-fail-on-result)
 fi
 
 if [[ $output_type == "stdout" ]]; then
-  output_cmd="-t $output_type";
+  SCAN_ARGS+=(-t "$output_type")
 else
-  output_cmd="-t $output_type -o $output_file";
+  SCAN_ARGS+=(-t "$output_type" -o "$output_file")
 fi
 
 clj-holmes fetch-rules -r "$rules_repository"
-clj-holmes scan -p . $fail_on_result_cmd $verbose_cmd $output_cmd
+clj-holmes scan -p . "${SCAN_ARGS[@]}"
