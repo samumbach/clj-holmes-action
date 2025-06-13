@@ -13,7 +13,8 @@ rule_tags="$8"
 rule_severities="$9"
 rule_precisions="${10}"
 extra_scan_args="${11}"
-extra_scan_args_sh="${12}"
+declare -a extra_scan_args_sh="(${12})"
+declare -p extra_scan_args_sh &>/dev/null || extra_scan_args_sh=()
 
 if [[ -d "${path}" ]]; then
   cd "${path}"
@@ -71,9 +72,11 @@ if [[ -n "${extra_scan_args}" ]]; then
   done <<<"${extra_scan_args}"
 fi
 
+SCAN_ARGS+=("${extra_scan_args_sh[@]}")
+
 echo "SCAN_ARGS:"
-bash -c 'printf -- "- #%s#\n" "$@" '"$extra_scan_args_sh" -- "${SCAN_ARGS[@]}"
+printf -- "- #%s#\n" "${SCAN_ARGS[@]}"
 echo ""
 
 clj-holmes fetch-rules -r "$rules_repository"
-bash -c 'clj-holmes scan -p . "$@" '"$extra_scan_args_sh" -- "${SCAN_ARGS[@]}"
+clj-holmes scan -p . "${SCAN_ARGS[@]}"
