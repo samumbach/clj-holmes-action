@@ -40,6 +40,9 @@ inputs:
   extra-scan-args:
     description: 'Newline-separated list of arguments to pass to `clj-holmes scan ...`'
     required: false
+  extra-scan-args-sh:
+    description: 'Extra arguments to pass to `clj-holmes scan ...` (use shell quoting/escaping as necessary)'
+    required: false
 
 runs:
   using: 'docker'
@@ -56,6 +59,7 @@ runs:
     - ${{ inputs.rule-severities }}
     - ${{ inputs.rule-precisions }}
     - ${{ inputs.extra-scan-args }}
+    - ${{ inputs.extra-scan-args-sh }}
 
 branding:
  color: gray-dark

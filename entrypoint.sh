@@ -13,6 +13,7 @@ rule_tags="$8"
 rule_severities="$9"
 rule_precisions="${10}"
 extra_scan_args="${11}"
+extra_scan_args_sh="${12}"
 
 if [[ -d "${path}" ]]; then
   cd "${path}"
@@ -65,6 +66,8 @@ done <<<"${rule_precisions}"
 while IFS=$'\n' read -r x; do
   SCAN_ARGS+=("$x")
 done <<<"${extra_scan_args}"
+
+SCAN_ARGS+=($extra_scan_args_sh)
 
 echo "SCAN_ARGS:"
 printf -- "- #%s#\n" "${SCAN_ARGS[@]}"
