@@ -16,6 +16,8 @@ It's also possible to specify the following:
 - output-type (json, sarif or stdout) [Default: sarif]
 - output-file [Default: clj_holmes_scan_results.txt]
 - fail-on-result (true or false) [Default: false]
+- verbose (true or false) [Default: false]
+- path, absolute or relative path to scan [Default: (empty -- scans current working directory)]
 
 ```
 - name: Scan
