@@ -63,9 +63,13 @@ while IFS=$' \t\n' read -r x; do
   fi
 done <<<"${rule_precisions}"
 
-while IFS=$'\n' read -r x; do
-  SCAN_ARGS+=("$x")
-done <<<"${extra_scan_args}"
+# when extra_scan_args is empty, yields no args
+# TODO: when extra_scan_args has trailing newline, yields an empty final arg (which may or may not be what the user intended)
+if [[ -n "${extra_scan_args}" ]]; then
+  while IFS=$'\n' read -r x; do
+    SCAN_ARGS+=("$x")
+  done <<<"${extra_scan_args}"
+fi
 
 echo "SCAN_ARGS:"
 bash -c 'printf -- "- #%s#\n" "$@" '"$extra_scan_args_sh" -- "${SCAN_ARGS[@]}"
