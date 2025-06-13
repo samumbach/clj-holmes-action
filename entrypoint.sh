@@ -68,8 +68,8 @@ while IFS=$'\n' read -r x; do
 done <<<"${extra_scan_args}"
 
 echo "SCAN_ARGS:"
-bash -c 'printf -- "- #%s#\n" "$@"' -- "" "${SCAN_ARGS[@]}" $extra_scan_args_sh
+bash -c 'printf -- "- #%s#\n" "$@" '"$extra_scan_args_sh" -- "${SCAN_ARGS[@]}"
 echo ""
 
 clj-holmes fetch-rules -r "$rules_repository"
-bash -c 'clj-holmes scan -p . "$@"' -- "" "${SCAN_ARGS[@]}" $extra_scan_args_sh
+bash -c 'clj-holmes scan -p . "$@" '"$extra_scan_args_sh" -- "${SCAN_ARGS[@]}"
