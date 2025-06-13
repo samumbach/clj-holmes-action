@@ -37,6 +37,9 @@ inputs:
   rule-precisions:
     description: 'Newline-separated list of rule precisions to include (e.g., "low\nmedium\nhigh\nvery-high")'
     required: false
+  extra-scan-args:
+    description: 'Newline-separated list of arguments to pass to `clj-holmes scan ...`'
+    required: false
 
 runs:
   using: 'docker'
@@ -52,6 +55,7 @@ runs:
     - ${{ inputs.rule-tags }}
     - ${{ inputs.rule-severities }}
     - ${{ inputs.rule-precisions }}
+    - ${{ inputs.extra-scan-args }}
 
 branding:
  color: gray-dark

@@ -12,6 +12,7 @@ ignored_paths="$7"
 rule_tags="$8"
 rule_severities="$9"
 rule_precisions="${10}"
+extra_scan_args="${11}"
 
 if [[ -d "${path}" ]]; then
   cd "${path}"
@@ -60,6 +61,10 @@ while IFS=$' \t\n' read -r x; do
     SCAN_ARGS+=(--rule-precision "$x")
   fi
 done <<<"${rule_precisions}"
+
+while IFS=$'\n' read -r x; do
+  SCAN_ARGS+=("$x")
+done <<<"${extra_scan_args}"
 
 echo "SCAN_ARGS:"
 printf -- "- #%s#\n" "${SCAN_ARGS[@]}"
